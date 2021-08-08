@@ -4,6 +4,8 @@ import os
 dotenv.load_dotenv()
 TOKEN = os.environ['TOKEN']
 
+print(TOKEN)
+
 import telegram
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryHandler, Handler
