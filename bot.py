@@ -3,15 +3,13 @@ import os
 
 dotenv.load_dotenv()
 TOKEN = os.environ['TOKEN']
+PORT = int(os.environ.get('PORT', '8443'))
 
 print(TOKEN)
+print(PORT)
 
-import telegram
-
-from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryHandler, Handler
-from telegram.ext import CallbackContext
-from telegram import Update
-from telegram import InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryHandler, Handler, CallbackContext
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update
 
 import logging
 import json
@@ -65,6 +63,10 @@ dispatcher.add_handler(CommandHandler('start', start))
 
 dispatcher.add_handler(MessageHandler(Filters.photo, process_photo))
 
-updater.start_polling()
+# Heroku will manage certificate and proxy automaticly
+updater.start_webhook(listen="0.0.0.0",
+                      port=PORT,
+                      url_path=TOKEN,
+                      webhook_url="https://telegram-invert-photo-bot.herokuapp.com/" + TOKEN)
 
 updater.idle()
