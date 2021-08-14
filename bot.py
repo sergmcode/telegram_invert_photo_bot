@@ -63,7 +63,8 @@ dispatcher.add_handler(CommandHandler('start', start))
 
 dispatcher.add_handler(MessageHandler(Filters.photo, process_photo))
 
-# Heroku will manage certificate and proxy automaticly
+# Heroku will manage certificate and proxy automatically
+# https://github.com/python-telegram-bot/python-telegram-bot/wiki/Webhooks
 updater.start_webhook(listen="0.0.0.0",
                       port=PORT,
                       url_path=TOKEN,
