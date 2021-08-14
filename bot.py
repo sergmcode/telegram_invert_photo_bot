@@ -1,7 +1,7 @@
-import dotenv
+# import dotenv
 import os
 
-dotenv.load_dotenv()
+# dotenv.load_dotenv()
 TOKEN = os.environ['TOKEN']
 PORT = int(os.environ.get('PORT', '8443'))
 
